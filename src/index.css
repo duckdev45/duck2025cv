@@ -1,0 +1,13 @@
+@import 'tailwindcss';
+
+/* 使用 @font-face 宣告本地字體 */
+@font-face {
+    font-family: 'Press Start 2P';
+    src: url('./assets/fonts/PressStart2P-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.font-pixel {
+    font-family: "Press Start 2P", system-ui;
+}
