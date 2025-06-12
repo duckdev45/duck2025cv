@@ -1,0 +1,55 @@
+# .github/workflows/deploy.yml
+
+name: Deploy to GitHub Pages
+
+# 觸發條件：當有 commit 推送到 develop 分支時觸發
+on:
+  push:
+    branches: [ "develop" ]
+  # 也可以讓你手動在 Actions 頁面觸發這個流程
+  workflow_dispatch:
+
+# 設定權限，讓 GitHub Actions 可以部署到 GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 定義要執行的作業 (jobs)
+jobs:
+  # 第一個作業：建置專案
+  build:
+    runs-on: ubuntu-latest # 使用最新的 Ubuntu 環境
+    steps:
+      - name: Checkout your repository
+        uses: actions/checkout@v4 # 步驟一：把你的程式碼載下來
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3 # 步驟二：安裝 pnpm
+        with:
+          version: 8 # pnpm 的版本，可以依據你的專案調整
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4 # 步驟三：設定 Node.js 環境
+        with:
+          node-version: '20' # Node.js 的版本
+          cache: 'pnpm' # 使用 pnpm 的快取
+
+      - name: Install dependencies
+        run: pnpm install # 步驟四：安裝套件
+
+      - name: Build project
+        run: pnpm run build # 步驟五：執行打包指令 (會產生 dist 資料夾)
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3 # 步驟六：上傳打包好的檔案，準備給下一個作業部署
+        with:
+          path: './dist' # 指定要上傳的資料夾路徑
+
+  # 第二個作業：部署到 GitHub Pages
+  deploy:
+    needs: build # 這個作業需要等 'build' 作業成功後才會開始
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4 # 直接使用官方的部署 Action
