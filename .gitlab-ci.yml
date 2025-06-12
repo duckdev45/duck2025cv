@@ -1,0 +1,25 @@
+# .gitlab-ci.yml
+
+# 1. 指定 CI/CD 運行的環境，我們選 Node.js 20 的版本
+image: node:20
+
+# 2. 定義一個叫做 'pages' 的作業 (job)，這是 GitLab Pages 的特殊名稱
+pages:
+  stage: deploy
+  script:
+    # 3. 因為你的專案是用 pnpm (pnpm-lock.yaml)，所以要先安裝 pnpm
+    - npm install -g pnpm
+    # 4. 安裝專案所有依賴套件
+    - pnpm install
+    # 5. 執行打包指令，這會產生 dist/ 資料夾
+    - pnpm run build
+    # 6. GitLab Pages 要求靜態檔案必須放在 public/ 資料夾，所以我們把 dist/ 的內容搬過去
+    #    (另一種作法是改 vite.config.ts 的 build.outDir，但這樣比較快)
+    - mv dist public
+  artifacts:
+    paths:
+      # 7. 告訴 GitLab CI/CD 要把哪個資料夾的內容當作部署的產物
+      - public
+  rules:
+    # 8. 設定規則：只有當 commit 被推送到 'develop' branch 時，才觸發這個作業
+    - if: $CI_COMMIT_BRANCH == 'develop'
