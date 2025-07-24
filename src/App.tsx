@@ -11,7 +11,7 @@ function App() {
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap');
         
         body {
-          font-family: 'Noto Sans TC', sans-serif; /* 使用更通用的中文字體作為內文 */
+          font-family: 'Noto Sans TC', sans-serif;
         }
         
         .font-pixel {
@@ -25,7 +25,7 @@ function App() {
         style={{ backgroundImage: `url(${BACKGROUND_URL})` }}
       >
         <Hero />
-        <h1 className="font-pixel text-3xl md:text-3xl text-gray-500 text-center mt-8 animate-bounce">▼</h1>
+        <h1 className="font-pixel text-4xl md:text-4xl text-gray-500 text-center mt-8 animate-bounce">▼</h1>
       </main>
     </>
   )
