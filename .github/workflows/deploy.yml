@@ -1,43 +1,44 @@
 name: Deploy to GitHub Pages
 
-# 觸發條件：push 到 dev 分支時觸發
 on:
   push:
     branches:
       - develop
 
-# 權限設定：允許 workflow 對 repo 進行寫入
 permissions:
   contents: write
 
 jobs:
   deploy:
-    # 指定 runner 環境
     runs-on: ubuntu-latest
 
     steps:
-      # 步驟 1: Checkout 你的程式碼
+      # step 1: Checkout
       - name: Checkout
         uses: actions/checkout@v4
 
-      # 步驟 2: 設定 Node.js 環境，並指定 pnpm 的版本
-      - name: Set up Node.js and pnpm
+      # step 2: 設定 Node.js 環境
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'pnpm'
 
-      # 步驟 3: 安裝專案依賴
+      # step 3: 安裝 pnpm
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      # 步驟 4: 設定 pnpm 快取並安裝依賴
+      # 把 pnpm install 跟 cache 設定合在一起
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
-      # 步驟 4: 打包你的專案
+      # 步驟 5: 打包你的專案
       - name: Build
         run: pnpm run build
 
-      # 步驟 5: 部署到 gh-pages 分支
+      # 步驟 6: 部署到 gh-pages 分支
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
-          github_token: ${{ secrets.DEPLOY_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
