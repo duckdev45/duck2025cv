@@ -26,6 +26,8 @@ jobs:
       # step 3: 安裝 pnpm
       - name: Install pnpm
         uses: pnpm/action-setup@v4
+        with:
+          version: '8.6.0'
 
       # 步驟 4: 設定 pnpm 快取並安裝依賴
       # 把 pnpm install 跟 cache 設定合在一起
