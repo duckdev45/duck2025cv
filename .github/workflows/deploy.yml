@@ -1,55 +1,43 @@
-# .github/workflows/deploy.yml
-
 name: Deploy to GitHub Pages
 
-# 觸發條件：當有 commit 推送到 develop 分支時觸發
+# 觸發條件：push 到 dev 分支時觸發
 on:
   push:
-    branches: [ "develop" ]
-  # 也可以讓你手動在 Actions 頁面觸發這個流程
-  workflow_dispatch:
+    branches:
+      - develop
 
-# 設定權限，讓 GitHub Actions 可以部署到 GitHub Pages
+# 權限設定：允許 workflow 對 repo 進行寫入
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
-# 定義要執行的作業 (jobs)
 jobs:
-  # 第一個作業：建置專案
-  build:
-    runs-on: ubuntu-latest # 使用最新的 Ubuntu 環境
-    steps:
-      - name: Checkout your repository
-        uses: actions/checkout@v4 # 步驟一：把你的程式碼載下來
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v3 # 步驟二：安裝 pnpm
-        with:
-          version: 8 # pnpm 的版本，可以依據你的專案調整
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4 # 步驟三：設定 Node.js 環境
-        with:
-          node-version: '20' # Node.js 的版本
-          cache: 'pnpm' # 使用 pnpm 的快取
-
-      - name: Install dependencies
-        run: pnpm install # 步驟四：安裝套件
-
-      - name: Build project
-        run: pnpm run build # 步驟五：執行打包指令 (會產生 dist 資料夾)
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3 # 步驟六：上傳打包好的檔案，準備給下一個作業部署
-        with:
-          path: './dist' # 指定要上傳的資料夾路徑
-
-  # 第二個作業：部署到 GitHub Pages
   deploy:
-    needs: build # 這個作業需要等 'build' 作業成功後才會開始
+    # 指定 runner 環境
     runs-on: ubuntu-latest
+
     steps:
+      # 步驟 1: Checkout 你的程式碼
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 步驟 2: 設定 Node.js 環境，並指定 pnpm 的版本
+      - name: Set up Node.js and pnpm
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      # 步驟 3: 安裝專案依賴
+      - name: Install dependencies
+        run: pnpm install
+
+      # 步驟 4: 打包你的專案
+      - name: Build
+        run: pnpm run build
+
+      # 步驟 5: 部署到 gh-pages 分支
       - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v4 # 直接使用官方的部署 Action
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
