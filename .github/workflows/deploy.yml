@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - develop
+      - develop # 當推送到 develop 分支時觸發
 
 permissions:
   contents: write
@@ -27,18 +27,18 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: '8.6.0'
+          version: 9
 
-      # 步驟 4: 設定 pnpm 快取並安裝依賴
-      # 把 pnpm install 跟 cache 設定合在一起
+      # step 4: 安裝依賴
+      # 在 pnpm v9 的 CI 環境中，'pnpm install' 就會自動用 lockfile 安裝，不用加 flag
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install
 
-      # 步驟 5: 打包你的專案
+      # step 5: 打包
       - name: Build
         run: pnpm run build
 
-      # 步驟 6: 部署到 gh-pages 分支
+      # step 6: 部署到 gh-pages 分支
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
