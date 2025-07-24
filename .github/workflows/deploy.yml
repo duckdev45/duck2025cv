@@ -38,19 +38,20 @@ jobs:
       - name: Build
         run: pnpm run build
 
-#      # step 6: 部署到 gh-pages 分支
-#      - name: Deploy to GitHub Pages
-#        uses: peaceiris/actions-gh-pages@v4
-#        with:
-#          github_token: ${{ secrets.GITHUB_TOKEN }}
-#          publish_dir: ./dist
-
-      # debug
-      - name: Display content of index.html
-        run: cat ./dist/index.html
-
+      # step 6: 部署到 gh-pages 分支
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
+          force_orphan: true
+
+      # debug
+      #      - name: Display content of index.html
+      #        run: cat ./dist/index.html
+      #
+      #      - name: Deploy to GitHub Pages
+      #        uses: peaceiris/actions-gh-pages@v4
+      #        with:
+      #          github_token: ${{ secrets.GITHUB_TOKEN }}
+      #          publish_dir: ./dist
