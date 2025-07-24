@@ -6,7 +6,7 @@ const Hero: React.FC = () => {
   return (
     // 卡片容器
     <motion.div
-      className="w-full max-w-4xl mx-auto bg-white/70 rounded-2xl border border-white/10 p-6 md:p-8 backdrop-blur-xl"
+      className="w-full max-w-3xl mx-auto bg-white/70 rounded-2xl border border-white/10 p-6 md:p-8 backdrop-blur-xl"
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: 'easeOut' }}
@@ -29,9 +29,7 @@ const Hero: React.FC = () => {
 
         {/* 右側資訊 */}
         <div className="text-center md:text-left py-2">
-          <h1 className="font-pixel text-4xl md:text-5xl text-gray-500">
-            YATZU HSU
-          </h1>
+          <h1 className="font-pixel text-4xl md:text-5xl text-gray-500">YATZU HSU</h1>
 
           <div className="flex justify-center md:justify-start gap-4 mt-6">
             <motion.button
@@ -39,14 +37,21 @@ const Hero: React.FC = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              FrontEnd
+              Frontend
             </motion.button>
             <motion.button
               className="font-pixel bg-[#5cc278] text-white px-6 py-2 rounded-lg text-sm"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              BackEnd
+              Backend
+            </motion.button>
+            <motion.button
+              className="font-pixel bg-[#5cc278] text-white px-6 py-2 rounded-lg text-sm"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              UI/UX
             </motion.button>
           </div>
         </div>

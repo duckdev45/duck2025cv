@@ -21,10 +21,11 @@ function App() {
 
       {/* 主容器，設定背景圖和 padding */}
       <main
-        className="min-h-screen w-full flex items-center justify-center p-4 md:p-8 bg-cover bg-center"
+        className="min-h-screen w-full flex flex-col items-center justify-center p-4 md:p-8 bg-cover bg-center"
         style={{ backgroundImage: `url(${BACKGROUND_URL})` }}
       >
         <Hero />
+        <h1 className="font-pixel text-3xl md:text-3xl text-gray-500 text-center mt-8 animate-bounce">▼</h1>
       </main>
     </>
   )
