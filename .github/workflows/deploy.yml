@@ -38,7 +38,17 @@ jobs:
       - name: Build
         run: pnpm run build
 
-      # step 6: 部署到 gh-pages 分支
+#      # step 6: 部署到 gh-pages 分支
+#      - name: Deploy to GitHub Pages
+#        uses: peaceiris/actions-gh-pages@v4
+#        with:
+#          github_token: ${{ secrets.GITHUB_TOKEN }}
+#          publish_dir: ./dist
+
+      # debug
+      - name: List build output
+        run: ls -R ./dist
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
