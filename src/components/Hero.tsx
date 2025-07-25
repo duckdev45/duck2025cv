@@ -46,13 +46,6 @@ const Hero: React.FC = () => {
             >
               Backend
             </motion.button>
-            <motion.button
-              className="font-pixel bg-[#5cc278] text-white px-6 py-2 rounded-lg text-sm"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              UI/UX
-            </motion.button>
           </div>
         </div>
       </div>
