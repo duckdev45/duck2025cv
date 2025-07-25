@@ -1,4 +1,5 @@
 import Hero from './components/Hero.tsx'
+import Skills from './components/Skills.tsx'
 import heroBg from './assets/images/heroBg.png'
 
 function App() {
@@ -25,7 +26,10 @@ function App() {
         style={{ backgroundImage: `url(${BACKGROUND_URL})` }}
       >
         <Hero />
-        <h1 className="font-pixel text-4xl md:text-4xl text-gray-500 text-center mt-8 animate-bounce">▼</h1>
+        <h1 className="font-pixel text-4xl md:text-4xl text-gray-500 text-center mt-8 animate-bounce">
+          ▼
+        </h1>
+        <Skills />
       </main>
     </>
   )
