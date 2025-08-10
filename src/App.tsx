@@ -1,6 +1,7 @@
 import Hero from './components/Hero.tsx'
 import Skills from './components/Skills.tsx'
 import heroBg from './assets/images/heroBg.png'
+import Experience from './components/Experience.tsx'
 
 function App() {
   const BACKGROUND_URL = heroBg
@@ -40,10 +41,7 @@ function App() {
 
         {/* Experience page */}
         <section className="h-screen w-full snap-start flex flex-col items-center justify-center p-4 md:p-8">
-          <div className="w-full max-w-xl rounded-2xl bg-white/70 p-8">
-            <h2 className="font-pixel text-2xl">Experience</h2>
-            <p className="mt-4">text text text😎</p>
-          </div>
+          <Experience />
         </section>
       </main>
     </>
