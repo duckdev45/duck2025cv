@@ -13,6 +13,7 @@ function App() {
         
         body {
           font-family: 'Noto Sans TC', sans-serif;
+          overflow: hidden;
         }
         
         .font-pixel {
@@ -20,16 +21,30 @@ function App() {
         }
       `}</style>
 
-      {/* 主容器，設定背景圖和 padding */}
       <main
-        className="min-h-screen w-full flex flex-col items-center justify-center p-4 md:p-8 bg-cover bg-center"
+        className="h-screen w-full overflow-y-scroll snap-y snap-mandatory bg-cover bg-center bg-fixed"
         style={{ backgroundImage: `url(${BACKGROUND_URL})` }}
       >
-        <Hero />
-        <h1 className="font-pixel text-4xl md:text-4xl text-gray-500 text-center mt-8 animate-bounce">
-          ▼
-        </h1>
-        <Skills />
+        {/* Hero page */}
+        <section className="h-screen w-full snap-start flex flex-col items-center justify-center p-4 md:p-8">
+          <Hero />
+          <h1 className="font-pixel mt-8 animate-bounce text-center text-4xl text-gray-500 md:text-4xl">
+            ▼
+          </h1>
+        </section>
+
+        {/* Skills page */}
+        <section className="h-screen w-full snap-start flex flex-col items-center justify-center p-4 md:p-8">
+          <Skills />
+        </section>
+
+        {/* Experience page */}
+        <section className="h-screen w-full snap-start flex flex-col items-center justify-center p-4 md:p-8">
+          <div className="w-full max-w-xl rounded-2xl bg-white/70 p-8">
+            <h2 className="font-pixel text-2xl">Experience</h2>
+            <p className="mt-4">text text text😎</p>
+          </div>
+        </section>
       </main>
     </>
   )

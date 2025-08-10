@@ -1,4 +1,4 @@
-#### 透過 pnpm 安裝所有 dependencies
+#### Install all dependencies with pnpm
 ```bash
 pnpm install
 ```
