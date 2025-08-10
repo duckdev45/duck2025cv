@@ -13,7 +13,7 @@ const Experience: React.FC = () => {
       <h1 className="font-pixel text-3xl md:text-4xl text-gray-500">{'Experience'}</h1>
       <div className="flex flex-col items-start gap-2 md:gap-8">
         {/* info block */}
-        <div className={'mt-6'}>
+        <div className={'mt-6 py-4'}>
           <div className={'font-semibold text-xl'}>允博科技有限公司-前端工程師</div>
           <div className={'text-gray-500 text-lg'}>2023/10 - 2025/08</div>
         </div>

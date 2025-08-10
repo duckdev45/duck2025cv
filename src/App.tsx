@@ -2,6 +2,7 @@ import Hero from './components/Hero.tsx'
 import Skills from './components/Skills.tsx'
 import heroBg from './assets/images/heroBg.png'
 import Experience from './components/Experience.tsx'
+import Contact from './components/Contact.tsx'
 
 function App() {
   const BACKGROUND_URL = heroBg
@@ -33,15 +34,23 @@ function App() {
             ▼
           </h1>
         </section>
-
         {/* Skills page */}
         <section className="h-screen w-full snap-start flex flex-col items-center justify-center p-4 md:p-8">
           <Skills />
+          <h1 className="font-pixel mt-8 animate-bounce text-center text-4xl text-gray-500 md:text-4xl">
+            ▼
+          </h1>
         </section>
-
         {/* Experience page */}
         <section className="h-screen w-full snap-start flex flex-col items-center justify-center p-4 md:p-8">
           <Experience />
+          <h1 className="font-pixel mt-8 animate-bounce text-center text-4xl text-gray-500 md:text-4xl">
+            ▼
+          </h1>
+        </section>
+        {/* Contact page */}
+        <section className="h-screen w-full snap-start flex flex-col items-center justify-center p-4 md:p-8">
+          <Contact />
         </section>
       </main>
     </>
